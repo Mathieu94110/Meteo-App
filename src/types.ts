@@ -1,4 +1,4 @@
-export const GET_WEATHER = "GET_WEATHER";
+export const GET_METEO_DATA = "GET_METEO_DATA";
 export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALERT = "SET_ALERT";
@@ -42,9 +42,10 @@ export interface WeatherData {
   visibility: number;
   weather: Weather[];
   wind: {
-    speed: number;
-    deg: number;
-  };
+    //
+    speed: number; //
+    deg: number; //
+  }; //
 }
 
 export interface WeatherError {
@@ -59,7 +60,7 @@ export interface WeatherState {
 }
 
 interface GetWeatherAction {
-  type: typeof GET_WEATHER;
+  type: typeof GET_METEO_DATA;
   payload: WeatherData;
 }
 
