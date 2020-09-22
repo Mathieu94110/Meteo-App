@@ -1,18 +1,18 @@
 import {
   GET_METEO_DATA,
-  WeatherState,
+  MeteoState,
   SET_ERROR,
   SET_LOADING,
-  WeatherAction,
+  MeteoAction,
 } from "../../types";
 
-const initialState = {
+const initialState: MeteoState = {
   data: null,
   loading: false,
   error: "",
 };
 
-export default (state = initialState, action: WeatherAction): WeatherState => {
+export default (state = initialState, action: MeteoAction): MeteoState => {
   switch (action.type) {
     case GET_METEO_DATA:
       return {
@@ -27,7 +27,9 @@ export default (state = initialState, action: WeatherAction): WeatherState => {
       };
     case SET_ERROR:
       return {
+        ...state,
         error: action.payload,
+        loading: false,
       };
     default:
       return state;

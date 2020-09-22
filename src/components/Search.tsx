@@ -33,9 +33,9 @@ const Search: React.FC<SearchProps> = ({ title }) => {
         <input
           onChange={handleChange}
           value={city}
-          placeholder="choisissez une ville !"
+          placeholder="Choisissez une ville !"
         />
-        <button></button>
+        <button>Rechercher</button>
       </form>
     </div>
   );
