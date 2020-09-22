@@ -3,14 +3,14 @@ export const SET_LOADING = "SET_LOADING";
 export const SET_ERROR = "SET_ERROR";
 export const SET_ALERT = "SET_ALERT";
 
-export interface Weather {
+export interface Meteo {
   description: string;
   icon: string;
   id: number;
   main: string;
 }
 
-export interface WeatherData {
+export interface MeteoData {
   base: string;
   clouds: {
     all: number;
@@ -40,7 +40,7 @@ export interface WeatherData {
   };
   timezone: number;
   visibility: number;
-  weather: Weather[];
+  weather: Meteo[];
   wind: {
     //
     speed: number; //
@@ -48,20 +48,20 @@ export interface WeatherData {
   }; //
 }
 
-export interface WeatherError {
+export interface MeteoError {
   cod: string;
   message: string;
 }
 
-export interface WeatherState {
-  data: WeatherData | null;
+export interface MeteoState {
+  data: MeteoData | null;
   loading: boolean;
   error: string;
 }
 
-interface GetWeatherAction {
+interface GetMeteoAction {
   type: typeof GET_METEO_DATA;
-  payload: WeatherData;
+  payload: MeteoData;
 }
 
 interface SetLoadingAction {
@@ -73,10 +73,7 @@ interface SetErrorAction {
   payload: string;
 }
 
-export type WeatherAction =
-  | GetWeatherAction
-  | SetLoadingAction
-  | SetErrorAction;
+export type MeteoAction = GetMeteoAction | SetLoadingAction | SetErrorAction;
 
 export interface AlertAction {
   type: typeof SET_ALERT;
