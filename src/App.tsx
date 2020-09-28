@@ -1,29 +1,27 @@
-import React, { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
-import { RootState } from "./store/reducers";
-import Search from "./components/Search";
+import React from "react";
 import Alert from "./components/Alert";
+import Search from "./components/Search";
 import Weather from "./components/Weather";
+import { RootState } from "./store/reducers";
+import { useSelector, useDispatch } from "react-redux";
 import { setAlert } from "./store/actions/alertActions";
-import { setError } from "./store/actions/weatherActions";
+import { setError, setLoading } from "./store/actions/weatherActions";
 
-const App: FC = () => {
-  const dispatch = useDispatch();
-  const weatherData = useSelector((state: RootState) => state.weather.data);
+const App: React.FC = () => {
+  const alertMsg = useSelector((state: RootState) => state.alert.message);
+  const meteo = useSelector((state: RootState) => state.weather.data);
   const loading = useSelector((state: RootState) => state.weather.loading);
   const error = useSelector((state: RootState) => state.weather.error);
-  const alertMsg = useSelector((state: RootState) => state.alert.message);
+  const dispatch = useDispatch();
 
   return (
     <div>
-      <Search title={""} />
+      <Search title="barre de recherche" />
       {loading ? (
-        <h2>Loading...</h2>
+        <h2>Chargement en cours</h2>
       ) : (
-        weatherData && <Weather data={weatherData} />
+        meteo && <Weather data={meteo} />
       )}
-
       {alertMsg && (
         <Alert message={alertMsg} onClose={() => dispatch(setAlert(""))} />
       )}

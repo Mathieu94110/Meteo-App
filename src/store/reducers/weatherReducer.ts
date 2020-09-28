@@ -1,15 +1,15 @@
 import {
-  GET_METEO_DATA,
   MeteoState,
-  SET_ERROR,
-  SET_LOADING,
   MeteoAction,
+  SET_LOADING,
+  SET_ERROR,
+  GET_METEO_DATA,
 } from "../../types";
 
 const initialState: MeteoState = {
   data: null,
-  loading: false,
   error: "",
+  loading: false,
 };
 
 export default (state = initialState, action: MeteoAction): MeteoState => {
@@ -24,6 +24,7 @@ export default (state = initialState, action: MeteoAction): MeteoState => {
       return {
         ...state,
         loading: true,
+        error: "",
       };
     case SET_ERROR:
       return {

@@ -1,39 +1,55 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 interface AlertProps {
   message: string;
   onClose: () => void;
 }
 
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
+
 const Alert: React.FC<AlertProps> = ({ message, onClose }) => {
+  const classes = useStyles();
+
   return (
-    <div
-      style={{
-        width: "400px",
-        height: "250px",
-        display: "flex",
-        border: "1px solid black",
-        borderRadius: "5px",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <header style={{ width: "100%", height: "150px", margin: "0 auto" }}>
-        <p style={{ textAlign: "center" }}>{message}</p>
-      </header>
-      <footer
-        style={{
-          justifyContent: "center",
-          width: "100%",
-          height: "100px",
-          margin: "0 auto",
-          alignItems: "center",
-        }}
-      >
-        <button onClick={onClose}>Fermer</button>
-      </footer>
-    </div>
+    <Card className={classes.root}>
+      <CardContent>
+        <Typography
+          className={classes.title}
+          color="textSecondary"
+          gutterBottom
+        >
+          Erreur
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {message}
+        </Typography>
+
+        <Typography variant="body2" component="p">
+          Veuillez renseigner un titre !
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button onClick={onClose} size="small">
+          Fermer
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 
