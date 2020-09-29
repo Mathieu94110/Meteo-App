@@ -3,6 +3,7 @@ import { Button, TextField, Collapse } from "@material-ui/core";
 import { useState, FormEventHandler, FormEvent } from "react";
 import { useDispatch } from "react-redux";
 import { setAlert } from "../store/actions/alertActions";
+
 import {
   getMeteo,
   setLoading,
@@ -25,11 +26,17 @@ const Search: React.FC<SearchProps> = ({ title }) => {
     e.preventDefault();
 
     if (!city.trim()) {
-      dispatch(setAlert("Il faut renseigner une ville !"));
+      dispatch(setAlert("la ville n'est pas indiquée"));
+
+      setTimeout(() => {
+        dispatch(setAlert(""));
+      }, 5000);
+
+      setLoading();
+      dispatch(getMeteo(city));
+
+      setCity("");
     }
-    setLoading();
-    dispatch(getMeteo(city));
-    setCity("");
   };
 
   return (

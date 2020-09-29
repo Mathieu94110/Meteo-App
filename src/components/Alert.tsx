@@ -13,7 +13,8 @@ interface AlertProps {
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    width: "400px",
+    margin: "15px auto",
   },
   title: {
     fontSize: 14,
@@ -38,10 +39,6 @@ const Alert: React.FC<AlertProps> = ({ message, onClose }) => {
         </Typography>
         <Typography variant="h5" component="h2">
           {message}
-        </Typography>
-
-        <Typography variant="body2" component="p">
-          Veuillez renseigner un titre !
         </Typography>
       </CardContent>
       <CardActions>

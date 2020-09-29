@@ -12,17 +12,42 @@ interface MeteoProps {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: "600px",
+    margin: "50px auto",
+    textAlign: "center",
   },
   media: {
     height: 140,
   },
+  city: {
+    fontSize: "20px",
+    fontWeight: "bold",
+  },
+  min: {
+    color: "#6FA9FF",
+  },
+  max: {
+    color: "#DD3D69",
+  },
+  temp: {
+    fontSize: "16px",
+    fontWeight: "bold",
+  },
+  city_sky: {
+    fontSize: "18px",
+    fontWeight: "bold",
+  },
+  otherdata: {
+    fontWeight: "bold",
+  },
 });
 
 const Meteo: React.FC<MeteoProps> = ({ data }) => {
-  const fahrenheit = data.main.temp * 1.8 - 459.67;
-  const celsius = data.main.temp - 273.15;
+  const fahrenheit = (data.main.temp * 1.8 - 459.67).toFixed(2);
+  const celsius = (data.main.temp - 273.15).toFixed(2);
   const classes = useStyles();
+  const temp_min = (data.main.temp_min - 273.15).toFixed(2);
+  const temp_max = (data.main.temp_max - 273.15).toFixed(2);
 
   return (
     <Card className={classes.root}>
@@ -32,21 +57,30 @@ const Meteo: React.FC<MeteoProps> = ({ data }) => {
         title="Weather_image"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography className={classes.city}>
           {data.name} - {data.sys.country}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography className={classes.city_sky}>
           {data.weather[0].description}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {data.main.temp}K
+
+        <Typography>
+          <Typography className={classes.temp}>Température :</Typography>
+          {celsius} ° C - {fahrenheit} ° F
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {fahrenheit} - {celsius}
+        <Typography>
+          <span className={classes.min}>min :</span> {temp_min} ° C
+          <span className={classes.max}> Max :</span> {temp_max} ° C
         </Typography>
-        <Typography>Humidité : {data.main.humidity}</Typography>
-        <Typography>Pression : {data.main.pressure}</Typography>
-        <Typography>Vent : {data.wind.speed} m/s</Typography>
+        <Typography className={classes.otherdata}>
+          Humidité : {data.main.humidity} %
+        </Typography>
+        <Typography className={classes.otherdata}>
+          Pression : {data.main.pressure} hPa
+        </Typography>
+        <Typography className={classes.otherdata}>
+          Vent : {data.wind.speed} m/s
+        </Typography>
       </CardContent>
     </Card>
   );
